@@ -1,0 +1,30 @@
+app:
+    name: Invpy
+    host: 0.0.0.0
+    port: 8080
+    debug: true
+    profile: False
+
+postgresql:
+    username: invpy
+    password: something
+    database: invpy
+    host: 127.0.0.1
+    port: 5432
+    sqlalchemy_uri: postgresql://{username}:{password}@{host}:{port}/{database}
+
+logging:
+    version: 1
+    disable_existing_loggers: false
+    formatters:
+        standard:
+            format: "%(asctime)s [%(levelname)s] (%(threadName)s) %(name)s: %(message)s"
+    handlers:
+        default:
+            level: DEBUG
+            class: logging.StreamHandler
+            formatter: standard
+    root:
+        level: DEBUG
+        handlers:
+            - default
