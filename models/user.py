@@ -33,8 +33,8 @@ class User(base.Base, base.BaseSQLAlchemy):
             "id": self.id,
             "username": self.username,
             "locked": self.locked,
-            "creation_date": self.creation_date.strftime("%Y-%m-%s %H:%M:%S"),
+            "creation_date": self.creation_date.strftime("%Y-%m-%d %H:%M:%S"),
             "modification_date": self.modification_date.strftime(
-                "%Y-%m-%s %H:%M:%S"
+                "%Y-%m-%d %H:%M:%S"
             ),
         }

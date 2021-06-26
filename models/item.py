@@ -34,8 +34,8 @@ class Item(base.Base, base.BaseSQLAlchemy):
             "description": self.description,
             "quantity": self.quantity,
             "image": self.image,
-            "creation_date": self.creation_date.strftime("%Y-%m-%s %H:%M:%S"),
+            "creation_date": self.creation_date.strftime("%Y-%m-%d %H:%M:%S"),
             "modification_date": self.modification_date.strftime(
-                "%Y-%m-%s %H:%M:%S"
+                "%Y-%m-%d %H:%M:%S"
             ),
         }

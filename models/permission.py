@@ -27,8 +27,8 @@ class Permission(base.Base, base.BaseSQLAlchemy):
             "id": self.id,
             "name": self.name,
             "description": self.description,
-            "creation_date": self.creation_date.strftime("%Y-%m-%s %H:%M:%S"),
+            "creation_date": self.creation_date.strftime("%Y-%m-%d %H:%M:%S"),
             "modification_date": self.modification_date.strftime(
-                "%Y-%m-%s %H:%M:%S"
+                "%Y-%m-%d %H:%M:%S"
             ),
         }
