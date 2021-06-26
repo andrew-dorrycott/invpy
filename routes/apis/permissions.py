@@ -9,18 +9,18 @@ import db
 import models
 
 
-root = flask.Blueprint("permissions", __name__)
+routes = flask.Blueprint("permissions", __name__, url_prefix="/v1/permissions")
 table = models.permission.Permission
 
 
-@root.route("/", methods=("GET",))
+@routes.route("/", methods=("GET",))
 def view_all():
     query = db.session.query(table)
 
     return json.dumps([permission.to_dict() for permission in query.all()])
 
 
-@root.route("/<permission_id>", methods=("GET",))
+@routes.route("/<permission_id>", methods=("GET",))
 def view_one(permission_id):
     query = db.session.query(table)
     user = query.filter(table.id == permission_id).first()
@@ -28,7 +28,7 @@ def view_one(permission_id):
     return json.dumps(user.to_dict())
 
 
-@root.route("", methods=("POST",))
+@routes.route("", methods=("POST",))
 def create():
     query = db.session.query(table)
 
@@ -47,7 +47,7 @@ def create():
         return json.dumps({"id": new_permission.id})
 
 
-@root.route("/<permission_id>", methods=("PUT",))
+@routes.route("/<permission_id>", methods=("PUT",))
 def edit(permission_id):
     query = db.session.query(table)
     body = flask.request.get_json()
@@ -66,7 +66,7 @@ def edit(permission_id):
     return json.dumps(response)
 
 
-@root.route("/<permission_id>", methods=("DELETE",))
+@routes.route("/<permission_id>", methods=("DELETE",))
 def delete(permission_id):
     query = db.session.query(table)
     user = query.filter(table.id == permission_id).first()

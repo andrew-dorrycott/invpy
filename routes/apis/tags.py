@@ -9,18 +9,18 @@ import db
 import models
 
 
-root = flask.Blueprint("tags", __name__)
+routes = flask.Blueprint("tags", __name__, url_prefix="/v1/tags")
 table = models.tag.Tag
 
 
-@root.route("/", methods=("GET",))
+@routes.route("/", methods=("GET",))
 def view_all():
     query = db.session.query(table)
 
     return json.dumps([tag.to_dict() for tag in query.all()])
 
 
-@root.route("/<tag_id>", methods=("GET",))
+@routes.route("/<tag_id>", methods=("GET",))
 def view_one(tag_id):
     query = db.session.query(table)
     tag = query.filter(table.id == tag_id).first()
@@ -28,7 +28,7 @@ def view_one(tag_id):
     return json.dumps(tag.to_dict())
 
 
-@root.route("", methods=("POST",))
+@routes.route("", methods=("POST",))
 def create():
     query = db.session.query(table)
 
@@ -47,7 +47,7 @@ def create():
         return json.dumps({"id": new_tag.id})
 
 
-@root.route("/<tag_id>", methods=("PUT",))
+@routes.route("/<tag_id>", methods=("PUT",))
 def edit(tag_id):
     query = db.session.query(table)
     body = flask.request.get_json()
@@ -64,7 +64,7 @@ def edit(tag_id):
     return json.dumps(response)
 
 
-@root.route("/<tag_id>", methods=("DELETE",))
+@routes.route("/<tag_id>", methods=("DELETE",))
 def delete(tag_id):
     query = db.session.query(table)
     tag = query.filter(table.id == tag_id).first()
