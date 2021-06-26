@@ -21,20 +21,3 @@ class User(base.Base, base.BaseSQLAlchemy):
     permissions = sqlalchemy.orm.relationship(
         permission.Permission, secondary="permissions_to_users"
     )
-
-    def to_dict(self):
-        """
-        Custom Dictionary/Json-able representation
-
-        :returns: Dict representation of the data
-        :rtype: dict
-        """
-        return {
-            "id": self.id,
-            "username": self.username,
-            "locked": self.locked,
-            "creation_date": self.creation_date.strftime("%Y-%m-%d %H:%M:%S"),
-            "modification_date": self.modification_date.strftime(
-                "%Y-%m-%d %H:%M:%S"
-            ),
-        }

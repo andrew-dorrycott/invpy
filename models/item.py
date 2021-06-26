@@ -20,22 +20,3 @@ class Item(base.Base, base.BaseSQLAlchemy):
     modification_date = sqlalchemy.Column(sqlalchemy.DateTime)
 
     tags = sqlalchemy.orm.relationship(tag.Tag, secondary="tags_to_items")
-
-    def to_dict(self):
-        """
-        Custom Dictionary/Json-able representation
-
-        :returns: Dict representation of the data
-        :rtype: dict
-        """
-        return {
-            "id": self.id,
-            "name": self.name,
-            "description": self.description,
-            "quantity": self.quantity,
-            "image": self.image,
-            "creation_date": self.creation_date.strftime("%Y-%m-%d %H:%M:%S"),
-            "modification_date": self.modification_date.strftime(
-                "%Y-%m-%d %H:%M:%S"
-            ),
-        }

@@ -1,7 +1,9 @@
 # Standard imports
+import datetime
 import urllib
 
 # Third party imports
+import sqlalchemy
 import sqlalchemy.ext.declarative
 
 # Application import
@@ -53,3 +55,28 @@ class Base:
         return "<{}(id='{id}', name='{name}')>".format(
             self.__class__.__name__, **self.__dict__
         )
+
+    def to_dict(self):
+        """
+        Custom Dictionary/Json-able representation
+
+        :returns: Dict representation of the data
+        :rtype: dict
+        """
+        response = {}
+
+        for key, value in self.__class__.__dict__.items():
+            sqlattribute = sqlalchemy.orm.attributes.InstrumentedAttribute
+            if isinstance(value, sqlattribute):
+                value = getattr(self, key)
+            else:
+                continue  # Skip key
+
+            if isinstance(value, datetime.datetime):
+                value = value.strftime("%Y-%m-%d %H:%M:%S")
+            elif isinstance(value, (tuple, list)):
+                value = [item.to_dict() for item in value]
+
+            response[key] = value
+
+        return response
