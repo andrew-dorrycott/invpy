@@ -1,5 +1,5 @@
 # Purpose
-* A lightweight web application for inventory management
+* A lightweight web application for physical inventory management
 
 # Requirements
 * Python 3.8+
@@ -82,7 +82,7 @@ python3 -m flask run
 ```
 
 ## Troubleshooting
-1. I recommend a strong beverage and a beautiful view of your surrounds to shoot down your trouble
+1. I recommend a strong beverage and a beautiful view of your surroundings to shoot down your trouble
 
 # Usage
 * From any browser, go to http://127.0.0.1:5000/register to create the first user
